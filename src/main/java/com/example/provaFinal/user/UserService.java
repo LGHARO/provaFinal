@@ -18,8 +18,11 @@ public class UserService {
 
     public ResponseUserDTO save(SaveUserDTO saveUserDTO, Integer userId) {
 
-        // valida tipo de user
-        validarAdmin(userId);
+        // deixa o primeiro user ser cadastrado pq se nao nn consigo iniciar os testes
+        if (userRepository.count() > 0) {
+            validarAdmin(userId);
+        }
+
 
         // se o usuario ja existir ele nn é adicionado novamente
         if (userRepository.existsByCpf(saveUserDTO.getCpf())) {
